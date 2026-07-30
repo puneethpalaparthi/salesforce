@@ -1,0 +1,82 @@
+Salesforce SOQL Practice – Additional Queries
+
+========================================
+1. WHERE Clause Query
+========================================
+
+Query:
+SELECT Product_Name__c, Brand__c
+FROM Product__c
+WHERE Brand__c = 'Apple'
+
+Output:
+------------------------------------------------
+Product Name      Brand
+------------------------------------------------
+iPhone 16         Apple
+
+========================================
+2. ORDER BY + LIMIT
+========================================
+
+Query:
+SELECT Order_Number__c, Total_Amount__c
+FROM Order__c
+ORDER BY Order_Date__c DESC
+LIMIT 3
+
+Output:
+------------------------------------------------
+Order Number      Total Amount
+------------------------------------------------
+ORD-0003          3500
+ORD-0002          2200
+ORD-0001          1500
+
+========================================
+3. Relationship Query (Child-to-Parent)
+========================================
+
+Query:
+SELECT Order_Number__c, Customer__r.Name
+FROM Order__c
+
+Output:
+------------------------------------------------
+Order Number      Customer
+------------------------------------------------
+ORD-0001          John Smith
+ORD-0002          Emma Wilson
+
+========================================
+4. Aggregate Query (GROUP BY)
+========================================
+
+Query:
+SELECT Payment_Status__c, COUNT(Id)
+FROM Payment__c
+GROUP BY Payment_Status__c
+
+Output:
+------------------------------------------------
+Payment Status    Count
+------------------------------------------------
+Successful        4
+Pending           2
+Failed            1
+
+========================================
+5. Comparison Operator (>=)
+========================================
+
+Query:
+SELECT Order_Number__c, Total_Amount__c
+FROM Order__c
+WHERE Total_Amount__c >= 2000
+
+Output:
+------------------------------------------------
+Order Number      Total Amount
+------------------------------------------------
+ORD-0002          2200
+ORD-0003          3500
