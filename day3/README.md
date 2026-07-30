@@ -1,74 +1,216 @@
-Salesforce Developer Module — E-Commerce Project Reflection
+# Salesforce Flow Automation Assignment
 
-A comprehensive learning and development repository for Salesforce platform development, covering core concepts, best practices, and practical implementations from the Day-1 E-Commerce task.
+## Project Title
+Order Automation using Salesforce Flow and Validation Rules
 
- Table of Contents
+## Project Description
+This project demonstrates how Salesforce declarative tools can be used to automate business processes without writing Apex code. A Record-Triggered Flow was created to automate order processing, and Validation Rules were implemented to ensure data integrity.
 
-- [Overview](#overview)
-- [Repository Structure](#repository-structure)
-- [Getting Started](#getting-started)
-- [Prerequisites](#prerequisites)
-- [Learning Modules](#learning-modules)
-- [Key Topics](#key-topics)
-- [Contributing](#contributing)
-- [Resources](#resources)
-- [License](#license)
+---
 
- Overview
+## Objectives
 
-This repository contains my personal reflection, implementations, and code for the Salesforce Developer Bridge Program. It documents my hands-on experience building an E-Commerce application using standard and custom objects, Apex triggers, SOQL queries, and Lightning Web Components (LWC).
+- Automate Order processing using Flow Builder.
+- Validate user input using Validation Rules.
+- Understand when to use Flow, Validation Rules, and Apex.
 
-Purpose
+---
 
-- **Learn**: Understand core Salesforce concepts, data modeling, and trigger design patterns
-- **Practice**: Build real-world E-Commerce objects (`Product__c`, `Order__c`, `Order_Item__c`, `Payment__c`, `Shipment__c`) and write trigger handlers
-- **Share**: Collaborate with my pod members, participate in code reviews, and log common learning issues
+## Technologies Used
 
-Repository Structure
+- Salesforce Developer Edition
+- Flow Builder
+- Record-Triggered Flow
+- Validation Rules
+- Email Action
+- Custom Object (Order)
 
-Salesforce/
-├── Day-1/                  # Data Model, SOQL queries, Triggers, and LWC files
-├── README.md               # This reflection file
-└── ...                     # Additional learning modules
+---
 
+## Flow Implementation
 
- Directory Organization
+### Record-Triggered Flow
 
-Each module is organized by learning day/week to create a structured learning path:
+**Flow Type:**
+- Record-Triggered Flow
 
-- **Day-1**: E-Commerce Data Modeling, Apex Execute Anonymous, SOQL Query Practice, Trigger Handler (`OrderItemTriggerHandler`), and LWC (`orderList`)
+**Object:**
+- Order
 
-## Getting Started
+**Trigger:**
+- A record is created
 
-### Prerequisites
+**Flow Actions:**
+1. Automatically assigns the current date to the Order Date field.
+2. Updates the Order record.
+3. Sends an email notification to the administrator.
 
-Before diving into this module, ensure you have:
+---
 
-1. **Salesforce Account**
-   - Developer Edition account or Trailhead Playground (free) - Sign up at [developer.salesforce.com](https://developer.salesforce.com)
-   - Dev Org configured with Master-Detail and Lookup relationship fields
+## Flow Structure
 
-2. **Development Environment**
-   - Visual Studio Code or Developer Console
-   - Salesforce CLI (SFDX) - [Installation Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-   - Git for version control
+Start
+↓
+Set Order Date (Assignment)
+↓
+Update Records
+↓
+Send Email
+↓
+End
 
-3. **Basic Knowledge**
-   - Object-oriented programming concepts (Apex syntax & handlers)
-   - Relational databases and SOQL basics
-   - Web development fundamentals (LWC HTML/JS framework)
+---
 
-### Installation
+## Validation Rules Implemented
 
-1. **Clone the repository**
-   ```bash
-   git clone [https://github.com/Snehasrinekkalapudi/Salesforce.git](https://github.com/Snehasrinekkalapudi/Salesforce.git)
-   cd Salesforce
-Set up Salesforce CLI
+### Validation Rule 1
+**Rule Name:**
+Validate_Total_Amount
 
-Bash
-# Install SFDX
-npm install -g @salesforce/cli
+**Purpose:**
+Ensures Total Amount is greater than zero.
 
-# Authorize your developer org
-sfdx force:auth:web:login -a DevOrg
+**Formula**
+
+```
+Total_Amount__c <= 0
+```
+
+**Error Message**
+
+```
+Total Amount must be greater than 0.
+```
+
+### Validation Rule 2
+
+**Rule Name:**
+Order_Date_Required
+
+**Purpose:**
+Ensures Order Date is not left blank.
+
+**Formula**
+
+```
+ISBLANK(Order_Date__c)
+```
+
+**Error Message**
+
+```
+Order Date is mandatory.
+```
+
+---
+
+### Validation Rule 3
+
+**Rule Name:**
+Customer_Required
+
+**Purpose:**
+Ensures a Customer is selected before saving the record.
+
+**Formula**
+
+```
+ISBLANK(Customer__c)
+```
+
+**Error Message**
+
+```
+Please select a Customer.
+```
+
+---
+
+# Project Files
+
+```
+Salesforce-Flow-Automation
+│
+├── Flow Export
+│      Order Auto Setup.flow-meta.xml
+│
+├── Validation Rules
+│      Validation Rule Formulas
+│
+├── Screenshots
+│      Flow Canvas.png
+│      Successful Email.png
+│      Successful Execution.png
+│
+└── README.md
+```
+
+---
+
+# Screenshots Included
+
+- Flow Canvas
+- Assignment Element
+- Update Records Element
+- Send Email Action
+- Successful Email Notification
+- Successful Flow Execution
+
+---
+
+# Assignment Questions
+
+## 1. Which requirements did you solve using Flow?
+
+The following requirements were implemented using a Record-Triggered Flow:
+
+- Automatically set the Order Date when a new Order is created.
+- Update the Order record.
+- Send an email notification to the administrator after the Order is created.
+
+---
+
+## 2. Which requirements required Validation Rules?
+
+Validation Rules were used to prevent invalid data from being saved.
+
+Implemented rules include:
+
+- Total Amount must be greater than zero.
+- Order Date cannot be blank.
+- Customer must be selected before saving the record.
+
+---
+
+## 3. Which requirements still needed Apex?
+
+No Apex code was required for this project because all business requirements were simple and could be implemented using Salesforce declarative tools.
+
+Examples of scenarios where Apex would be required include:
+
+- Complex business logic
+- External API integrations
+- Bulk processing
+- Advanced calculations across multiple objects
+
+---
+
+## 4. Why did you choose those solutions?
+
+Flow was chosen because it provides a no-code solution for automating business processes such as updating records and sending emails.
+
+Validation Rules were chosen because they prevent invalid data from being saved and maintain data quality.
+
+Apex was not used because the project requirements were straightforward and could be completed efficiently using declarative Salesforce features.
+
+---
+
+# Learning Outcomes
+
+After completing this project, I learned:
+
+- How to create a Record-Triggered Flow.
+- How Assignment and Update Records elements work.
+- How to send emails using Flow.
+- How Validation Rules improve data quality.
+- When to use Flow, Validation Rules, and Apex in Salesforce.
