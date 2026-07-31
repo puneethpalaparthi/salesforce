@@ -2,7 +2,7 @@ import { LightningElement } from 'lwc';
 
 export default class HomePage extends LightningElement {
 
-    customerName = 'Chaitra';
+    customerName = 'Puneeth';
     todayDate = '31 July 2026';
 
     totalProducts = 50;
